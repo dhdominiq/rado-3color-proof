@@ -1,0 +1,52 @@
+=== ZOOM A: 3-AP vs x + a*y = z (powtorzenia dozwolone) ===
+a=1      | R = 8         | 0.0    ms | CCNNNCC
+a=2      | R = 13  (+5 ) | 0.0    ms | CCNCNNNNCNCC
+a=3      | R = 17  (+4 ) | 0.1    ms | CCNCCNNNNNCCNNCC
+a=4      | R = 21  (+4 ) | 0.1    ms | CCNNCCNNNNNNNNCCNNCC
+a=5      | R = 24  (+3 ) | 0.2    ms | CCNNCCNNNNNNNNNNNCCNNCC
+a=6      | R = 27  (+3 ) | 0.4    ms | CCNNCCNNNNNNNNNNNNNNCCNNCC
+a=7      | R = 30  (+3 ) | 0.9    ms | CCNNCCNNNNNCNCNNNNNNNNNCCNNCC
+a=8      | R = 33  (+3 ) | 2.2    ms | CCNNCCNNNNNCCNNNNNNNNNNNNNCCNNCC
+a=9      | R = 36  (+3 ) | 5.9    ms | CCNNCCNNNNNCCNCNNNNNNNNNNNNNNCCNNCC
+a=10     | R = 39  (+3 ) | 15.0   ms | CCNNCCNNNNNCCNCCNNNNNNNNNNNNNNNNCCNNCC
+a=11     | R = 42  (+3 ) | 36.1   ms | CCNNCCNNNNNCCNCCNNNNNNNNNNNNNNNNNNNCCNNCC
+a=12     | R = 45  (+3 ) | 91.9   ms | CCNNCCNNNNNCCNCCNNNNNNNNNNNNNNNCCNNNNNCCNNCC
+a=13     | R = 48  (+3 ) | 241.7  ms | CCNNCCNNNNNCCNCCNNNNNNNNNNNNNNNCCNCCNNNNNCCNNCC
+a=14     | R = 51  (+3 ) | 618.5  ms | CCNNCCNNNNNCCNCCNNNNNNNNNNNNNNNNNCCNCCNNNNNNCCNNCC
+
+=== ZOOM B: 3-AP vs x + a*y = z (liczby ROZNE) ===
+a=1      | R = 10        | 0.0    ms
+a=2      | R = 14  (+4 ) | 0.0    ms
+a=3      | R = 17  (+3 ) | 0.0    ms
+a=4      | R = 21  (+4 ) | 0.1    ms
+a=5      | R = 26  (+5 ) | 0.3    ms
+a=6      | R = 28  (+2 ) | 0.6    ms
+a=7      | R = 32  (+4 ) | 1.6    ms
+a=8      | R = 35  (+3 ) | 4.5    ms
+a=9      | R = 38  (+3 ) | 12.9   ms
+a=10     | R = 41  (+3 ) | 36.3   ms
+a=11     | R = 44  (+3 ) | 96.5   ms
+a=12     | R = 47  (+3 ) | 255.2  ms
+
+=== ZOOM C: 3-AP vs x + y + c = z (liczby ROZNE) ===
+c=0      | R = 10        | 0.0    ms | CCNCNNNCC
+c=1      | R = 12  (+2 ) | 0.0    ms | CCNCCNNNNCC
+c=2      | R = 13  (+1 ) | 0.0    ms | CCNCCNNNNNCC
+c=3      | R = 14  (+1 ) | 0.0    ms | CCNCCNNNNCNCC
+c=4      | R = 15  (+1 ) | 0.0    ms | CCNCCNNNNCCNCC
+c=5      | R = 17  (+2 ) | 0.1    ms | CCNNCCNNNNNCCNCC
+c=6      | R = 18  (+1 ) | 0.1    ms | CCNNCCNNNNNCCNNCC
+c=7      | R = 19  (+1 ) | 0.1    ms | CCNNCCNNNNNNCCNNCC
+c=8      | R = 20  (+1 ) | 0.1    ms | CCNNCCNNNNNNCNCNNCC
+c=9      | R = 21  (+1 ) | 0.1    ms | CCNNCCNNNNNNNCNCNNCC
+c=10     | R = 22  (+1 ) | 0.2    ms | CCNNCCNNNNNCNNCNCNNCC
+c=11     | R = 23  (+1 ) | 0.3    ms | CCNNCCNNNNNNNNNCNCNNCC
+c=12     | R = 24  (+1 ) | 0.4    ms | CCNNCCNNNNNNCNNNCNCNNCC
+c=13     | R = 25  (+1 ) | 0.5    ms | CCNNCCNNNNNNNNNNNCNCNNCC
+c=14     | R = 26  (+1 ) | 0.7    ms | CCNNCCNNNNNCNCNNNNNCCNNCC
+c=15     | R = 27  (+1 ) | 1.1    ms | CCNNCCNNNNNNNNNNCNNCNCNNCC
+c=16     | R = 28  (+1 ) | 1.5    ms | CCNNCCNNNNNNCNCNNNNNNCCNNCC
+c=17     | R = 29  (+1 ) | 2.1    ms | CCNNCCNNNNNCNNNNNNNNNNNCCNCC
+c=18     | R = 30  (+1 ) | 3.0    ms | CCNNCCNNNNNCNCNNNNNNNNNCCNNCC
+c=19     | R = 31  (+1 ) | 4.3    ms | CCNNCCNNNNNCCNNNNNNNNNNNNCCNCC
+c=20     | R = 32  (+1 ) | 6.1    ms | CCNNCCNNNNNCCNCNNNNNNNNNNCCNNCC

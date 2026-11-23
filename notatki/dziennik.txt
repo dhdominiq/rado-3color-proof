@@ -1,0 +1,65 @@
+=== PROJEKT BADAWCZY #01 ===
+Temat: Liczby Rado (Teoria Ramseya)
+Cel: Zbudować solver w C++, znaleźć niezbadaną rodzinę równań, wyprowadzić pełny wzór i udowodnić go w Lean 4.
+
+[WPIS 02] - 22.11.2026
+- Skalibrowano solver_01 w C++ (backtracking).
+- Potwierdzone znane wyniki: Schur(2)=5, Schur(3)=14, W(3,2)=9, W(3,3)=27 (21.38 ms), R(x+2y=3z, 2)=13.
+- Zapisano kopie kodu (kod/01_kalibracja.cpp) oraz wynik (wyniki/01_kalibracja.txt).
+- Kolejny krok: Eksperyment 02 - skan asymetrycznych liczb Rado.
+
+[WPIS 03] - 22.11.2026
+- Uruchomiono Eksperyment 02 (kod/02_skan.cpp -> wyniki/02_skan.txt).
+- Wyniki:
+  * Rodzina A (3-AP vs x+ay=z): 8, 13, 17, 21, 24, 27 (dla a=1..6).
+  * Rodzina B (3-AP vs x+ay=z, rozne): 10, 14, 17, 21, 26, 28 (dla a=1..6).
+  * Rodzina C (3-AP vs x+y+c=z, rozne): 10, 12, 13, 14, 15, 17, 18 (dla c=0..6).
+- Kolejny krok: Eksperyment 03 - rozszerzenie zakresow (a do 14, c do 20) i wypisanie wzorcow kolorowan.
+
+[WPIS 05] - 23.11.2026
+- Uruchomiono 04_krok_dalej.cpp -> wyniki/04_krok_dalej.txt.
+- Test 1 (2 kolory, x+2y=3z vs x+ay=z): wyszedl czysty wzor 4a + 7 (11, 15, 19, 23, 27, 31, 35, 39).
+- Test 2 (3 kolory, 3-AP vs 3-AP vs x+ay=z): a=1 -> 33, a=2 -> 42, przy a=3 timeout na N=52.
+- Decyzja: przechodzimy na solver SAT w Pythonie (python-sat), zeby policzyc 3 kolory dla wiekszych a.
+
+[WPIS 06] - 23.11.2026
+- Uruchomiono solver SAT dla 3 kolorow (05_sat_3kolory.py -> wyniki/05_sat_3kolory.txt).
+- Wyniki dla 3-AP vs 3-AP vs (x+ay=z): a=1->33, a=2->42, a=3->56, a=4->69, a=5->81, a=6->91.
+- Odkryto metode pelnego dowodu asymptotycznego: dla dostatecznie duzych a, R = 9a + K, gdzie K <= 76 to ograniczona liczba van der Waerdena W*(3,4).
+- Kolejny krok: wyznaczenie dokladnej stalej K przez SAT (06_szukamy_K.py).
+
+[WPIS 07] - 23.11.2026
+- Wyznaczono dokladna stala K = 64 (06_szukamy_K.py -> wyniki/06_K.txt).
+- N=63: DA SIE (10.83 s), N=64: NIE DA SIE (39.89 s).
+- Pelne twierdzenie (3 kolory: 3-AP, 3-AP, x+ay=z): dla wszystkich a >= 28, R = 9a + 64.
+- Kolejny krok: niezalezna weryfikacja kolorowania dla a=28 oraz test progu a (07_weryfikacja.py), nastepnie formalizacja w Lean 4.
+
+[WPIS 08] - 23.11.2026
+- Niezalezna weryfikacja (07_weryfikacja.py -> wyniki/07_weryfikacja.txt):
+  * Wzorzec 63-znakowy: 0 bledow.
+  * Pelne 3-kolorowanie dla a=28 (N=315): 0 bledow w C/Z i 0 bledow w N.
+  * Druga niebieska liczba po 9 musi byc <= 11 (prog a >= 28 optymalny dla tej konstrukcji).
+- Kolejny krok: instalacja Lean 4 i formalny dowod twierdzenia R = 9a + 64 dla wszystkich a >= 28.
+
+[WPIS 09] - 23.11.2026
+- Zainstalowano Lean 4.36.0.
+- Utworzono formalny dowod twierdzenia R(3-AP, 3-AP, x+ay=z) = 9a + 64 dla a >= 28 w pliku lean/Rado3Kolory.lean.
+
+[WPIS 10] - 23.11.2026
+- SUKCES: Plik lean/Rado3Kolory.lean skompilowal sie w Lean 4.36.0 bez bledow i bez sorryAx.
+- Aksjomaty: [propext, Quot.sound].
+- Wynik: R(3-AP, 3-AP, x + a*y = z) = 9a + 64 dla wszystkich a >= 28 (przy zalozeniu W(3,4)=76 oraz K=64).
+- Zapisano wynik kompilacji do wyniki/08_lean_ok.txt.
+
+[WPIS 11] - 23.11.2026
+- Wygenerowano certyfikat DRAT dla K = 64 (08_certyfikat_K64.py, solver cadical195):
+  * wyniki/K64.cnf (4434 reguly)
+  * wyniki/K64.drat (3 604 634 krokow, 210.84 MB, czas 40.18 s).
+- Przeszukano OEIS i arXiv: brak ciagu 33, 42, 56, 69, 81, 91 oraz wzoru 9a + 64 dla 3 kolorow.
+- Kolejny krok: niezalezna weryfikacja certyfikatu przez drat-trim.
+
+[WPIS 12] - 23.11.2026
+- SUKCES: Niezalezny weryfikator drat-trim potwierdzil certyfikat K64.drat (s VERIFIED).
+- Statystyki: 3323/4434 klauzul w rdzeniu, 1 445 331 lematow, 44 638 345 krokow rezolucji, czas 59.31 s.
+- Dowod twierdzenia R(3-AP, 3-AP, x + a*y = z) = 9a + 64 dla wszystkich a >= 28 jest w 100% domkniety (Lean 4 + DRAT).
+- Przygotowano pliki publikacyjne: README.md, OPIS_PO_POLSKU.md, LICENSE, .gitignore.

@@ -1,0 +1,7 @@
+.venv/
+kod/*_bin
+kod/drat-trim/
+kod/solver_01/cmake-build-*/
+kod/solver_01/.idea/
+wyniki/K64.drat
+.DS_Store

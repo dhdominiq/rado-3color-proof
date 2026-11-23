@@ -1,0 +1,12 @@
+=== SZUKAMY DOKLADNEJ STALEJ K (wiemy, ze K <= 76) ===
+Test N=40: DA SIE (0.00 s)
+Test N=55: DA SIE (0.01 s)
+Test N=65: NIE DA SIE (45.68 s)
+Test N=60: DA SIE (0.06 s)
+Test N=62: DA SIE (3.96 s)
+Test N=63: DA SIE (10.83 s)
+Test N=64: NIE DA SIE (39.89 s)
+
+>>> WYNIK: K = 64 <<<
+Wzór dla dużych a: R = 9*a + 64
+Kolorowanie dla N=63: 011001102033013112102203233002231332011011203202033213112123300
