@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{Exact 3-Color Off-Diagonal Rado Numbers: \\ $R(\text{3-AP}, \text{3-AP}, x + ay = z) = 9a + 64$}
+\author{Dominik Pala}
+\date{November 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We determine the exact 3-color off-diagonal Rado number $R(a)$ for two monochromatic 3-term arithmetic progressions (3-AP) and the linear equation $x + ay = z$ in the third color. Specifically, we prove that $R(a) = 9a + 64$ for all integers $a \ge 28$, and we compute exact small values for $1 \le a \le 6$. The proof combines an explicit lower-bound construction and a structural upper-bound reduction formally verified in Lean~4 (relying only on the standard axioms \texttt{propext} and \texttt{Quot.sound}) with a machine-checked DRAT SAT certificate verified by \texttt{drat-trim} for a restricted 4-color van der Waerden threshold $K = 64$.
+\end{abstract}
+
+\section{Introduction}
+
+In Ramsey theory on the integers, Rado's theorem (1933) characterizes partition regularity of linear equations, while van der Waerden's theorem guarantees monochromatic arithmetic progressions in any finite coloring of $\{1, \dots, N\}$ for sufficiently large $N$. While exact 2-color off-diagonal Rado numbers have been studied extensively, exact closed-form formulas for 3-color mixed systems combining arithmetic progressions and parameterized linear equations remain largely open.
+
+\begin{definition}
+For an integer $a \ge 1$, let $R(a)$ denote the smallest positive integer $N$ such that every 3-coloring $\chi : \{1, 2, \dots, N\} \to \{\mathrm{Red}, \mathrm{Green}, \mathrm{Blue}\}$ contains at least one of the following:
+\begin{enumerate}
+    \item a monochromatic $\mathrm{Red}$ 3-term arithmetic progression $x, x+d, x+2d$ with $d \ge 1$,
+    \item a monochromatic $\mathrm{Green}$ 3-term arithmetic progression $x, x+d, x+2d$ with $d \ge 1$,
+    \item a monochromatic $\mathrm{Blue}$ solution to $x + ay = z$ (with $x = y$ allowed).
+\end{enumerate}
+\end{definition}
+
+Our main result establishes the exact value of $R(a)$ for all $a \ge 28$.
+
+\begin{theorem}[Main Theorem]
+For every integer $a \ge 28$,
+\[
+R(a) = 9a + 64.
+\]
+\end{theorem}
+
+\section{Computed Small Values}
+
+Using a SAT encoding solved with \texttt{CaDiCaL 1.9.5}, we determined the exact values of $R(a)$ for $1 \le a \le 6$, summarized in Table~\ref{tab:small}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+$a$ & 1 & 2 & 3 & 4 & 5 & 6 \\
+\midrule
+$R(a)$ & 33 & 42 & 56 & 69 & 81 & 91 \\
+\bottomrule
+\end{tabular}
+\caption{Exact values of $R(a)$ for $1 \le a \le 6$.}
+\label{tab:small}
+\end{table}
+
+\section{Proof Architecture and Lean 4 Formalization}
+
+The proof of the Main Theorem is split into two machine-checked parts, formalized in \texttt{lean/Rado3Color.lean} using Lean~4.36.0.
+
+\subsection{Lower Bound ($R(a) \ge 9a + 64$ for $a \ge 28$)}
+We explicitly construct a valid 3-coloring of $\{1, \dots, 9a + 63\}$ from a 63-element 4-coloring template avoiding monochromatic 3-APs. The Lean~4 proof verifies that no monochromatic 3-AP occurs in Red or Green and no monochromatic solution to $x + ay = z$ occurs in Blue for any $a \ge 28$. This direction is completely self-contained and requires no external hypotheses.
+
+\subsection{Upper Bound ($R(a) \le 9a + 64$ for $a \ge 12$)}
+The formal proof establishes $W(3,2) = 9$ internally and reduces the upper bound for all $a \ge 12$ (and in particular $a \ge 28$) to two finite combinatorial facts:
+\begin{enumerate}
+    \item \textbf{Classical 4-color van der Waerden number:} $W(3,4) = 76$ (Beeler and O'Neil, 1979), meaning no 4-coloring of $\{1, \dots, 76\}$ avoids monochromatic 3-APs.
+    \item \textbf{Restricted 4-color threshold ($K = 64$):} There is no 4-coloring $f : \{1, \dots, 64\} \to \{0, 1, 2, 3\}$ avoiding monochromatic 3-APs such that $f(i) \in \{0, 1\}$ for all $i \in \{1, \dots, 8\}$.
+\end{enumerate}
+
+Running \texttt{\#print axioms main\_theorem} in Lean~4.36.0 confirms that the formal proof compiles without \texttt{sorry} and depends solely on the standard core axioms \texttt{propext} and \texttt{Quot.sound}.
+
+\section{Verified SAT Certificate for $K = 64$}
+
+To establish the finite constant $K = 64$ with full mathematical rigor, we encoded the restricted 4-coloring problem on $\{1, \dots, 64\}$ into conjunctive normal form (\texttt{results/K64.cnf}):
+\begin{itemize}
+    \item \textbf{Variables and clauses:} 256 Boolean variables and 4,434 clauses, including standard color symmetry breaking ($f(1) \neq 1$ and $f(9) \neq 3$).
+    \item \textbf{Proof generation:} Solved as \texttt{UNSAT} using \texttt{CaDiCaL 1.9.5} in 40.18 seconds, producing a DRAT proof (\texttt{K64.drat}) of 3,604,634 steps (210.84~MB).
+    \item \textbf{Independent verification:} Checked using \texttt{drat-trim}, which returned \texttt{s VERIFIED} in 59.31 seconds (3,323 of 4,434 clauses in core; 1,445,331 of 1,814,113 lemmas in core; 44,638,345 resolution steps).
+\end{itemize}
+
+\section{Reproducibility and Artifacts}
+
+All Lean~4 proofs, SAT generation scripts, CNF instances, and verification logs are publicly archived:
+\begin{itemize}
+    \item \textbf{Zenodo Archive (DOI):} \url{https://doi.org/10.5281/zenodo.24476657}
+    \item \textbf{GitHub Repository:} \url{https://github.com/dhdominiq/rado-3color-proof}
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{Rado1933}
+R.~Rado, \emph{Studien zur Kombinatorik}, Mathematische Zeitschrift \textbf{36} (1933), 424--470.
+
+\bibitem{BeelerONeil1979}
+M.~D.~Beeler and P.~E.~O'Neil, \emph{Some new van der Waerden numbers}, Discrete Mathematics \textbf{28} (1979), 135--146.
+
+\bibitem{HeuleDRAT}
+N.~Wetzler, M.~J.~H.~Heule, and W.~A.~Hunt~Jr., \emph{DRAT-trim: Efficient checking and trimming using expressive clausal proofs}, SAT 2014, LNCS 8561, 422--429.
+
+\bibitem{Lean4}
+L.~de~Moura and S.~Ullrich, \emph{The Lean 4 theorem prover and programming language}, CADE 2021, LNCS 12699, 625--635.
+
+\bibitem{Zenodo2026}
+Dominik, \emph{Exact 3-Color Off-Diagonal Rado Numbers: $R(\text{3-AP}, \text{3-AP}, x + ay = z) = 9a + 64$}, Zenodo (2026), \url{https://doi.org/10.5281/zenodo.24476657}.
+\end{thebibliography}
+
+\end{document}
