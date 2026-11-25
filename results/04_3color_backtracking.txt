@@ -1,0 +1,14 @@
+=== TEST 1 (2 kolory): (x + 2y = 3z) vs (x + a*y = z) ===
+a=1    | R = 11        | 0.1 ms
+a=2    | R = 15  (+4 ) | 0.1 ms
+a=3    | R = 19  (+4 ) | 0.1 ms
+a=4    | R = 23  (+4 ) | 0.2 ms
+a=5    | R = 27  (+4 ) | 0.5 ms
+a=6    | R = 31  (+4 ) | 1.2 ms
+a=7    | R = 35  (+4 ) | 3.0 ms
+a=8    | R = 39  (+4 ) | 9.9 ms
+
+=== TEST 2 (3 kolory): (3-AP) vs (3-AP) vs (x + a*y = z) ===
+a=1    | R = 33        | 30.7 ms
+a=2    | R = 42  (+9 ) | 830.8 ms
+a=3    | [TIMEOUT przy N=52]

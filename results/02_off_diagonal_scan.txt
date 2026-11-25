@@ -1,0 +1,24 @@
+=== RODZINA A: 3-AP vs x + a*y = z (powtorzenia dozwolone) ===
+[x+y=2z (rozne)] vs [x+1y=z] -> R = 8 (0.037208 ms)
+[x+y=2z (rozne)] vs [x+2y=z] -> R = 13 (0.077542 ms)
+[x+y=2z (rozne)] vs [x+3y=z] -> R = 17 (0.117042 ms)
+[x+y=2z (rozne)] vs [x+4y=z] -> R = 21 (0.207959 ms)
+[x+y=2z (rozne)] vs [x+5y=z] -> R = 24 (0.376709 ms)
+[x+y=2z (rozne)] vs [x+6y=z] -> R = 27 (0.701333 ms)
+
+=== RODZINA B: 3-AP vs x + a*y = z (liczby ROZNE) ===
+[x+y=2z (rozne)] vs [x+1y=z (rozne)] -> R = 10 (0.032959 ms)
+[x+y=2z (rozne)] vs [x+2y=z (rozne)] -> R = 14 (0.057084 ms)
+[x+y=2z (rozne)] vs [x+3y=z (rozne)] -> R = 17 (0.094292 ms)
+[x+y=2z (rozne)] vs [x+4y=z (rozne)] -> R = 21 (0.216916 ms)
+[x+y=2z (rozne)] vs [x+5y=z (rozne)] -> R = 26 (0.588042 ms)
+[x+y=2z (rozne)] vs [x+6y=z (rozne)] -> R = 28 (1.30096 ms)
+
+=== RODZINA C: 3-AP vs x + y + c = z (liczby ROZNE) ===
+[x+y=2z (rozne)] vs [x+y+0=z (rozne)] -> R = 10 (0.032542 ms)
+[x+y=2z (rozne)] vs [x+y+1=z (rozne)] -> R = 12 (0.037958 ms)
+[x+y=2z (rozne)] vs [x+y+2=z (rozne)] -> R = 13 (0.044292 ms)
+[x+y=2z (rozne)] vs [x+y+3=z (rozne)] -> R = 14 (0.0545 ms)
+[x+y=2z (rozne)] vs [x+y+4=z (rozne)] -> R = 15 (0.068792 ms)
+[x+y=2z (rozne)] vs [x+y+5=z (rozne)] -> R = 17 (0.092875 ms)
+[x+y=2z (rozne)] vs [x+y+6=z (rozne)] -> R = 18 (0.123125 ms)

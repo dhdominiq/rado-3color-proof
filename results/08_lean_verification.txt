@@ -1,0 +1,3 @@
+main_theorem (a : Nat) (ha : a ≥ 28) (hW34 : ¬∃ f, Valid4AP 76 f) (hK64 : ¬∃ f, ValidRestricted4AP 64 f) :
+  (∃ col, ValidColoring a (9 * a + 63) col) ∧ ¬∃ col, ValidColoring a (9 * a + 64) col
+'main_theorem' depends on axioms: [propext, Quot.sound]

@@ -1,0 +1,5 @@
+1. Test wzorca 63-znakowego: OK (0 bledow)
+2. Test pelnego kolorowania dla a=28 (N=315):
+   - Bledy 3-AP w C i Z: 0
+   - Bledy x+28y=z w N:  0
+3. Maksymalny zasieg bez drugiej niebieskiej liczby (po 9): 10 (wiec nastepna niebieska <= 11)
